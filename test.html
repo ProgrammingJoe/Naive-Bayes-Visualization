@@ -1,7 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
 	<style type="text/css">
 		rect.bordered {
 			stroke: #E6E6E6;
@@ -44,97 +44,16 @@
 		}
 	</style>
 	<script src="http://d3js.org/d3.v3.js" type="text/javascript"></script>
-	<title>Scatterplot d3v4</title>
-	<link href="main.css" rel="stylesheet">
+	<title></title>
 </head>
-
-<script src="http://d3js.org/d3.v3.js" type="text/javascript"></script>
 <body>
-	<div id="page-wrap">
-
-		<h1>Naive Bayes Visualization</h1>
-
-		</div>
-		<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
-		<script type="text/javascript">
-		  d3.csv("data/zoo-modified.csv", function(error, data) {
-			  if (error) throw error;
-
-			  var sortAscending = true;
-			  var table = d3.select('#page-wrap').append('table');
-			  var titles = d3.keys(data[0]);
-			  var headers = table.append('thead').append('tr')
-			                   .selectAll('th')
-			                   .data(titles).enter()
-			                   .append('th')
-			                   .text(function (d) {
-				                    return d;
-			                    })
-			                   .on('click', function (d) {
-			                	   headers.attr('class', 'header');
-
-		                	     rows.sort(function(a, b) { return b["class_type"] < a["class_type"]; });
-		                	     sortAscending = false;
-		                	     this.className = 'aes';
-			                   });
-
-			  var rows = table.append('tbody').selectAll('tr')
-			               .data(data).enter()
-			               .append('tr');
-			  rows.selectAll('td')
-			    .data(function (d) {
-			    	return titles.map(function (k) {
-			    		return { 'value': d[k], 'name': k};
-			    	});
-			    }).enter()
-			    .append('td')
-			    .attr('data-th', function (d) {
-			    	return d.name;
-			    })
-			    .text(function (d) {
-			    	return d.value;
-			    });
-		  });
-
-			localStorage.setItem("stage", 0);
-
-			function goForward() {
-				var stage = localStorage.getItem("stage");
-
-				if(stage === 0) {
-					merge_rows();
-				} else {
-					// do nothing
-				}
-			}
-
-			function goBackward() {
-
-			}
-		</script>
-		<script>
-
-		</script>
-<div class="container">
-	<div class="buttons">
-		<div class="button back-button">
-			<input name="updateButton"
-               type="button"
-               value="Backward"
-               onclick="goBackward()"
-            />
-		</div>
-		<div class="button forward-button">
-			<input name="updateButton"
-               type="button"
-               value="Forward"
-               onclick="goForward()"
-            />
-		</div>
-	</div>
-</div>
+<form>
+	<label><input type="radio" name="mode" value="bypercent" checked> Percent</label>
+	<label><input type="radio" name="mode" value="bycount"> Number of Respondants</label>
+</form>
 
 <div id="chart"></div>
+
 <script type="text/javascript">
 
     var margin = {top: 20, right: 231, bottom: 140, left: 40},
@@ -166,30 +85,19 @@
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     // load and handle the data
-    d3.csv("data/barchartfakedata.csv", function(error, data) {
-
-        console.log(data);
-
-//        categories = [];
-//        for (i = 0; i < data.length-1; i++){
-//            categories.push(data[i].Class);
-//		}
-//		console.log(categories);
+    d3.csv("data/zoo-modified.csv", function(error, data) {
 
         // rotate the data
         var categories = d3.keys(data[0]).filter(function(key) { return key !== "Absolutes"; });
         var parsedata = categories.map(function(name) { return { "Absolutes": name }; });
-		console.log(parsedata);
-
         data.forEach(function(d) {
             parsedata.forEach(function(pd) {
                 pd[d["Absolutes"]] = d[pd["Absolutes"]];
             });
         });
 
-        console.log(parsedata);
         // map column headers to colors (except for 'Absolutes' and 'Base: All Respondents')
-        colors.domain(d3.keys(parsedata[0]).filter(function(key) { return key !== "Absolutes" && key !== "Base"; }));
+        colors.domain(d3.keys(parsedata[0]).filter(function(key) { return key !== "Absolutes" && key !== "Base: All Respondents"; }));
 
         // add a 'responses' parameter to each row that has the height percentage values for each rect
         parsedata.forEach(function(pd) {
@@ -269,12 +177,71 @@
             .attr("dy", ".35em")
             .style("text-anchor", "start")
             .text(function(d) { return d; });
+
+        // animation
+        d3.selectAll("input").on("change", handleFormClick);
+
+        function handleFormClick() {
+            if (this.value === "bypercent") {
+                transitionPercent();
+            } else {
+                transitionCount();
+            }
+        }
+
+        // transition to 'percent' presentation
+        function transitionPercent() {
+            // reset the yscale domain to default
+            yscale.domain([0, 1]);
+
+            // create the transition
+            var trans = svg.transition().duration(250);
+
+            // transition the bars
+            var categories = trans.selectAll(".category");
+            categories.selectAll("rect")
+                .attr("y", function(d) { return yscale(d.yp1); })
+                .attr("height", function(d) { return yscale(d.yp0) - yscale(d.yp1); });
+
+            // change the y-axis
+            // set the y axis tick format
+            yaxis.tickFormat(d3.format(".0%"));
+            svg.selectAll(".y.axis").call(yaxis);
+        }
+
+        // transition to 'count' presentation
+        function transitionCount() {
+            // set the yscale domain
+            yscale.domain([0, d3.max(parsedata, function(d) { return d.totalresponses; })]);
+
+            // create the transition
+            var transone = svg.transition()
+                .duration(250);
+
+            // transition the bars (step one)
+            var categoriesone = transone.selectAll(".category");
+            categoriesone.selectAll("rect")
+                .attr("y", function(d) { return this.getBBox().y + this.getBBox().height - (yscale(d.y0) - yscale(d.y1)) })
+                .attr("height", function(d) { return yscale(d.y0) - yscale(d.y1); });
+
+            // transition the bars (step two)
+            var transtwo = transone.transition()
+                .delay(350)
+                .duration(350)
+                .ease("bounce");
+            var categoriestwo = transtwo.selectAll(".category");
+            categoriestwo.selectAll("rect")
+                .attr("y", function(d) { return yscale(d.y1); });
+
+            // change the y-axis
+            // set the y axis tick format
+            yaxis.tickFormat(d3.format(".2s"));
+            svg.selectAll(".y.axis").call(yaxis);
+        }
     });
 
     d3.select(self.frameElement).style("height", (height + margin.top + margin.bottom) + "px");
 
 </script>
 </body>
-
-
 </html>
