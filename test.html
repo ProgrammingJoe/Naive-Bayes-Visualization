@@ -1,0 +1,128 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>D3 in Action Sortable Spreadhseet Example</title>
+  <meta charset="utf-8" />
+</head>
+<script src="http://d3js.org/d3.v3.min.js" type="text/javascript">
+</script>
+<style>
+
+div.data {
+  position: absolute;
+  width: 90px;
+  padding: 0 5px;
+}
+
+div.head {
+  position: absolute;
+}
+
+div.datarow {
+  position: absolute;
+  width: 100%;
+  border-top: 2px black solid;
+  background: white;
+  height: 35px;
+  overflow: hidden;
+}
+
+div.table {
+  position:relative;
+}
+
+</style>
+<body onload="spreadsheet2();">
+<div id="controls" />
+  <footer>
+<script>
+
+function spreadsheet2() {
+      d3.json("data/zoo-modified.json",function(error,data) {
+        expData=data;
+        createSpreadsheet(data)
+      });
+
+      function createSpreadsheet(incData) {
+        var keyValues = d3.keys(incData[0])
+
+        d3.select("#controls")
+        .append("div")
+        .attr("class", "table")
+
+        d3.select("div.table")
+        .append("div")
+        .attr("class", "head")
+        .selectAll("div.data")
+        .data(keyValues)
+        .enter()
+        .append("div")
+        .attr("class", "data")
+        .html(function (d) {return d})
+        .style("left", function(d,i) {return (i * 100) + "px"});
+
+        d3.select("div.table")
+        .selectAll("div.datarow")
+        .data(incData, function(d) {return d.animal_name}).enter()
+        .append("div")
+        .attr("class", "datarow")
+        .style("top", function(d,i) {return (40 + (i * 40)) + "px"});
+
+        d3.selectAll("div.datarow")
+        .selectAll("div.data")
+        .data(function(d) {return d3.entries(d)})
+        .enter()
+        .append("div")
+        .attr("class", "data")
+        .html(function (d) {return d.value})
+        .style("left", function(d,i,j) {return (i * 100) + "px"});
+
+        d3.select("#controls").insert("button", ".table").on("click", highlightClasses).html("[1] Highlight");
+        d3.select("#controls").insert("button", ".table").on("click", sortSheet).html("[2] Sort");
+        d3.select("#controls").insert("button", ".table").on("click", mergeRows).html("[3] Merge Rows")
+        d3.select("#controls").insert("button", ".table").on("click", generateProbabilities).html("[4] Probabilities")
+        d3.select("#controls").insert("button", ".table").on("click", stackedBar).html("[5] Stacked Bar")
+
+        function transitionSheet() {
+          d3.selectAll("div.datarow")
+            .transition()
+            .duration(2000)
+            .style("top", function(d,i) {return (40 + (i * 40)) + "px"});
+        }
+
+        function sortSheet() {
+          var dataset = d3.selectAll("div.datarow").data();
+
+          dataset.sort(function(a,b) {
+            return a.class_type > b.class_type;
+          });
+
+          d3.selectAll("div.datarow").data(dataset, function(d) {
+            return d.animal_name
+          })
+          .transition()
+          .duration(2000)
+          .style("top", function(d,i) {return (40 + (i * 40))});
+        }
+
+        function highlightClasses() {
+
+        }
+
+        function mergeRows() {
+
+        }
+
+        function generateProbabilities() {
+
+        }
+
+        function stackedBar() {
+
+        }
+      }
+}
+
+</script>
+</footer>
+</body>
+</html>

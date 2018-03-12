@@ -30,7 +30,10 @@
 			                   .on('click', function (d) {
 			                	   headers.attr('class', 'header');
 
-		                	     rows.sort(function(a, b) { return b["class_type"] < a["class_type"]; });
+		                	     rows.sort(function(a, b) {
+														 return b["class_type"] < a["class_type"];
+													 });
+
 		                	     sortAscending = false;
 		                	     this.className = 'aes';
 			                   });
@@ -38,6 +41,7 @@
 			  var rows = table.append('tbody').selectAll('tr')
 			               .data(data).enter()
 			               .append('tr');
+
 			  rows.selectAll('td')
 			    .data(function (d) {
 			    	return titles.map(function (k) {
