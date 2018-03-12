@@ -36,7 +36,7 @@ function spreadsheet2() {
         .append("div")
         .attr("class", "data")
         .html(function (d) {return d})
-        .style("left", function(d,i) {return (i * 100) + "px"});
+        .style("left", function(d,i) {return (i * 86) + "px"});
 
         d3.select("div.table")
         .selectAll("div.datarow")
@@ -52,7 +52,7 @@ function spreadsheet2() {
         .append("div")
         .attr("class", "data")
         .html(function (d) {return d.value})
-        .style("left", function(d,i,j) {return (i * 100) + "px"});
+        .style("left", function(d,i,j) {return (i * 86) + "px"});
 
         d3.select("#controls #buttons").insert("div", ".button").on("click", highlightClasses).html("1");
         d3.select("#controls #buttons").insert("div", ".table").on("click", sortSheet).html("2");
