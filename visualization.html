@@ -35,7 +35,13 @@ function spreadsheet2() {
         .enter()
         .append("div")
         .attr("class", "data")
-        .html(function (d) {return d})
+        .html(function (d) {
+          if(d === 'animal_name'){
+            return 'Animal'
+          } else {
+            return d
+          }
+        })
         .style("left", function(d,i) {return (i * 86) + "px"});
 
         d3.select("div.table")
@@ -97,7 +103,33 @@ function spreadsheet2() {
         }
 
         function mergeRows() {
+          var dataset = d3.selectAll("div.datarow").data();
 
+          d3.nest().key(function(d){
+              return d.class_type;
+          })
+          .rollup(function(v){ return {
+                hair: d3.sum(v, function(d){return d.hair;})/v.length,
+                feathers: d3.sum(v, function(d){return d.feathers;})/v.length,
+                eggs: d3.sum(v, function(d){return d.eggs;})/v.length,
+                milk: d3.sum(v, function(d){return d.milk;})/v.length,
+                airborne: d3.sum(v, function(d){return d.airborne;})/v.length,
+                aquatic: d3.sum(v, function(d){return d.aquatic;})/v.length,
+                predator: d3.sum(v, function(d){return d.predator;})/v.length,
+                toothed: d3.sum(v, function(d){return d.toothed;})/v.length,
+                backbone: d3.sum(v, function(d){return d.backbone;})/v.length,
+                breathes: d3.sum(v, function(d){return d.breathes;})/v.length,
+                venomous: d3.sum(v, function(d){return d.venomous;})/v.length,
+                fins: d3.sum(v, function(d){return d.fins;})/v.length,
+                tail: d3.sum(v, function(d){return d.tail;})/v.length,
+                domestic: d3.sum(v, function(d){return d.domestic;})/v.length,
+                catsize: d3.sum(v, function(d){return d.catsize;})/v.length
+              }
+          }).entries(dataset)
+          .map(function(d){
+              console.log(d)
+              return {Class: d.key, Values: d.values};
+          });
         }
 
         function generateProbabilities() {

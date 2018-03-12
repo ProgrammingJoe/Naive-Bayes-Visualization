@@ -9,6 +9,7 @@ div.data {
 
 div.data:first-child {
   width: 90px;
+  border-right: 2px solid black;
 }
 
 div.head {
