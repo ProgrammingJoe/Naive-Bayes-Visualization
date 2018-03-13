@@ -20,6 +20,9 @@ function spreadsheet2() {
         createSpreadsheet(data)
       });
 
+      var class2 = {};
+      var class4 = {};
+
       function createSpreadsheet(incData) {
         var keyValues = d3.keys(incData[0])
 
@@ -36,17 +39,13 @@ function spreadsheet2() {
         .append("div")
         .attr("class", "data")
         .html(function (d) {
-          if(d === 'animal_name'){
-            return 'Animal'
-          } else {
-            return d
-          }
+          return d
         })
         .style("left", function(d,i) {return (i * 86) + "px"});
 
         d3.select("div.table")
         .selectAll("div.datarow")
-        .data(incData, function(d) {return d.animal_name}).enter()
+        .data(incData, function(d) {return d.animal}).enter()
         .append("div")
         .attr("class", "datarow")
         .style("top", function(d,i) {return (40 + (i * 40)) + "px"});
@@ -60,11 +59,11 @@ function spreadsheet2() {
         .html(function (d) {return d.value})
         .style("left", function(d,i,j) {return (i * 86) + "px"});
 
-        d3.select("#controls #buttons").insert("div", ".button").on("click", highlightClasses).html("1");
-        d3.select("#controls #buttons").insert("div", ".table").on("click", sortSheet).html("2");
-        d3.select("#controls #buttons").insert("div", ".table").on("click", mergeRows).html("3")
-        d3.select("#controls #buttons").insert("div", ".table").on("click", generateProbabilities).html("4")
-        d3.select("#controls #buttons").insert("div", ".table").on("click", stackedBar).html("5")
+        d3.select("#controls #buttons").insert("div", "#button1").on("click", highlightClasses).html("1");
+        d3.select("#controls #buttons").insert("div", "#button2").on("click", sortSheet).html("2");
+        d3.select("#controls #buttons").insert("div", "#button3").on("click", mergeRows).html("3");
+        d3.select("#controls #buttons").insert("div", "#button4").on("click", generateProbabilities).html("4");
+        d3.select("#controls #buttons").insert("div", "#button5").on("click", stackedBar).html("5");
 
         function transitionSheet() {
           d3.selectAll("div.datarow")
@@ -77,11 +76,11 @@ function spreadsheet2() {
           var dataset = d3.selectAll("div.datarow").data();
 
           dataset.sort(function(a,b) {
-            return a.class_type > b.class_type;
+            return a.class > b.class;
           });
 
           d3.selectAll("div.datarow").data(dataset, function(d) {
-            return d.animal_name
+            return d.animal
           })
           .transition()
           .duration(2000)
@@ -102,40 +101,123 @@ function spreadsheet2() {
           });
         }
 
+        // Merges the rows of the table
         function mergeRows() {
           var dataset = d3.selectAll("div.datarow").data();
 
           d3.nest().key(function(d){
-              return d.class_type;
+              return d.class;
           })
-          .rollup(function(v){ return {
-                hair: d3.sum(v, function(d){return d.hair;})/v.length,
-                feathers: d3.sum(v, function(d){return d.feathers;})/v.length,
-                eggs: d3.sum(v, function(d){return d.eggs;})/v.length,
-                milk: d3.sum(v, function(d){return d.milk;})/v.length,
-                airborne: d3.sum(v, function(d){return d.airborne;})/v.length,
-                aquatic: d3.sum(v, function(d){return d.aquatic;})/v.length,
-                predator: d3.sum(v, function(d){return d.predator;})/v.length,
-                toothed: d3.sum(v, function(d){return d.toothed;})/v.length,
-                backbone: d3.sum(v, function(d){return d.backbone;})/v.length,
-                breathes: d3.sum(v, function(d){return d.breathes;})/v.length,
-                venomous: d3.sum(v, function(d){return d.venomous;})/v.length,
-                fins: d3.sum(v, function(d){return d.fins;})/v.length,
-                tail: d3.sum(v, function(d){return d.tail;})/v.length,
-                domestic: d3.sum(v, function(d){return d.domestic;})/v.length,
-                catsize: d3.sum(v, function(d){return d.catsize;})/v.length
+          .rollup(function(v){
+            if(v.class === 2){class2.len = v.length;}
+            if(v.class === 4){class4.len = v.length;}
+
+            return {
+                animal: v.animal,
+                hair: d3.sum(v, function(d){return d.hair;}),
+                feathers: d3.sum(v, function(d){return d.feathers;}),
+                eggs: d3.sum(v, function(d){return d.eggs;}),
+                milk: d3.sum(v, function(d){return d.milk;}),
+                airborne: d3.sum(v, function(d){return d.airborne;}),
+                aquatic: d3.sum(v, function(d){return d.aquatic;}),
+                predator: d3.sum(v, function(d){return d.predator;}),
+                toothed: d3.sum(v, function(d){return d.toothed;}),
+                backbone: d3.sum(v, function(d){return d.backbone;}),
+                breathes: d3.sum(v, function(d){return d.breathes;}),
+                venomous: d3.sum(v, function(d){return d.venomous;}),
+                fins: d3.sum(v, function(d){return d.fins;}),
+                tail: d3.sum(v, function(d){return d.tail;}),
+                domestic: d3.sum(v, function(d){return d.domestic;}),
+                catsize: d3.sum(v, function(d){return d.catsize;}),
+                class: v.class
               }
           }).entries(dataset)
           .map(function(d){
-              console.log(d)
-              return {Class: d.key, Values: d.values};
+              console.log(d);
+              if(d.key === "2") {
+                class2.vals = Object.values(d.values);
+              } else if (d.key === "4") {
+                class4.vals = Object.values(d.values);
+              }
+          });
+
+          d3.select('div.head div:first-child').text('');
+
+          // Merge all the class 2 rows to one location
+          d3.selectAll("div.datarow").data(dataset, function(d) {
+            if(d.class === 2) {
+              return d.animal
+            }
+          })
+          .transition()
+          .duration(2000)
+          .style("top", 40);
+
+          // Change merged row values to sums
+          d3.selectAll("div.datarow").data(dataset, function(d) {
+            if(d.animal === 'mole') {
+              return d.animal
+            }
+          })
+          .selectAll("div.data")
+          .each(function (d, i) {
+            d3.select(this).text(class2.vals[i]);
+            if(i === class2.vals.length - 1) {
+              d3.select(this).text(2);
+            } else if(i === 0) {
+              d3.select(this).text('count');
+            }
+          });
+
+          // Merge all the class 4 rows to one location
+          d3.selectAll("div.datarow").data(dataset, function(d) {
+            if(d.class === 4) {
+              return d.animal
+            }
+          })
+          .transition()
+          .duration(2000)
+          .style("top", 80);
+
+          // Change merged row values to sums
+          d3.selectAll("div.datarow").data(dataset, function(d) {
+            if(d.animal === 'skimmer') {
+              return d.animal
+            }
+          })
+          .selectAll("div.data")
+          .each(function (d, i) {
+            d3.select(this).text(class4.vals[i]);
+            if(i === class4.vals.length - 1) {
+              d3.select(this).text(4);
+            } else if(i === 0) {
+              d3.select(this).text('count');
+            }
           });
         }
 
+        // Sums the rows and divides by the number of classes
         function generateProbabilities() {
+          var dataset = d3.selectAll("div.datarow").data();
 
+          // d3.selectAll("div.datarow").data(dataset, function(d) {
+          //   if(d.animal === 'mole') {
+          //     return d.animal
+          //   }
+          // })
+          // .selectAll("div.data")
+          // .each(function (d, i) {
+          //   if(i === 0) {
+          //     d3.select(this).text('Probability');
+          //   } else if(d.class === 2) {
+          //     console.log(d3.select(this).text(d3.select(this).text()/class2.len));
+          //   } else if(d.class === 4) {
+          //     d3.select(this).text(d3.select(this).text()/class4.len)
+          //   }
+          // });
         }
 
+        // Converts the probabilities into a stacked bar chart
         function stackedBar() {
 
         }

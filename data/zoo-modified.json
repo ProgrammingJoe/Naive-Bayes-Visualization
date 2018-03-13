@@ -1,6 +1,6 @@
 [
   {
-    "animal_name": "kiwi",
+    "animal": "kiwi",
     "hair": 0,
     "feathers": 1,
     "eggs": 1,
@@ -16,10 +16,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 0,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "ladybird",
+    "animal": "ladybird",
     "hair": 0,
     "feathers": 0,
     "eggs": 1,
@@ -35,10 +35,10 @@
     "tail": 0,
     "domestic": 0,
     "catsize": 0,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "lark",
+    "animal": "lark",
     "hair": 0,
     "feathers": 1,
     "eggs": 1,
@@ -54,10 +54,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 0,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "leopard",
+    "animal": "leopard",
     "hair": 1,
     "feathers": 0,
     "eggs": 0,
@@ -73,10 +73,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "lion",
+    "animal": "lion",
     "hair": 1,
     "feathers": 0,
     "eggs": 0,
@@ -92,10 +92,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "rhea",
+    "animal": "rhea",
     "hair": 0,
     "feathers": 1,
     "eggs": 1,
@@ -111,10 +111,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class_type": 4
+    "class": 4
   },
   {
-    "animal_name": "scorpion",
+    "animal": "scorpion",
     "hair": 0,
     "feathers": 0,
     "eggs": 0,
@@ -130,10 +130,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 0,
-    "class_type": 4
+    "class": 4
   },
   {
-    "animal_name": "penguin",
+    "animal": "penguin",
     "hair": 0,
     "feathers": 1,
     "eggs": 1,
@@ -149,10 +149,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "puma",
+    "animal": "puma",
     "hair": 1,
     "feathers": 0,
     "eggs": 0,
@@ -168,10 +168,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class_type": 4
+    "class": 4
   },
   {
-    "animal_name": "mongoose",
+    "animal": "mongoose",
     "hair": 1,
     "feathers": 0,
     "eggs": 0,
@@ -187,10 +187,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "moth",
+    "animal": "moth",
     "hair": 1,
     "feathers": 0,
     "eggs": 1,
@@ -206,10 +206,10 @@
     "tail": 0,
     "domestic": 0,
     "catsize": 0,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "newt",
+    "animal": "newt",
     "hair": 0,
     "feathers": 0,
     "eggs": 1,
@@ -225,10 +225,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 0,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "octopus",
+    "animal": "octopus",
     "hair": 0,
     "feathers": 0,
     "eggs": 1,
@@ -244,10 +244,10 @@
     "tail": 0,
     "domestic": 0,
     "catsize": 1,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "opossum",
+    "animal": "opossum",
     "hair": 1,
     "feathers": 0,
     "eggs": 0,
@@ -263,10 +263,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 0,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "sealion",
+    "animal": "sealion",
     "hair": 1,
     "feathers": 0,
     "eggs": 0,
@@ -282,10 +282,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class_type": 4
+    "class": 4
   },
   {
-    "animal_name": "seasnake",
+    "animal": "seasnake",
     "hair": 0,
     "feathers": 0,
     "eggs": 0,
@@ -301,10 +301,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 0,
-    "class_type": 4
+    "class": 4
   },
   {
-    "animal_name": "seawasp",
+    "animal": "seawasp",
     "hair": 0,
     "feathers": 0,
     "eggs": 1,
@@ -320,10 +320,10 @@
     "tail": 0,
     "domestic": 0,
     "catsize": 0,
-    "class_type": 4
+    "class": 4
   },
   {
-    "animal_name": "oryx",
+    "animal": "oryx",
     "hair": 1,
     "feathers": 0,
     "eggs": 0,
@@ -339,10 +339,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "ostrich",
+    "animal": "ostrich",
     "hair": 0,
     "feathers": 1,
     "eggs": 1,
@@ -358,10 +358,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "parakeet",
+    "animal": "parakeet",
     "hair": 0,
     "feathers": 1,
     "eggs": 1,
@@ -377,10 +377,10 @@
     "tail": 1,
     "domestic": 1,
     "catsize": 0,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "penguin",
+    "animal": "penguin",
     "hair": 0,
     "feathers": 1,
     "eggs": 1,
@@ -396,10 +396,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "pheasant",
+    "animal": "pheasant",
     "hair": 0,
     "feathers": 1,
     "eggs": 1,
@@ -415,10 +415,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 0,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "pike",
+    "animal": "pike",
     "hair": 0,
     "feathers": 0,
     "eggs": 1,
@@ -434,10 +434,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "porpoise",
+    "animal": "porpoise",
     "hair": 0,
     "feathers": 0,
     "eggs": 0,
@@ -453,10 +453,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class_type": 4
+    "class": 4
   },
   {
-    "animal_name": "puma",
+    "animal": "puma",
     "hair": 1,
     "feathers": 0,
     "eggs": 0,
@@ -472,10 +472,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class_type": 4
+    "class": 4
   },
   {
-    "animal_name": "pussycat",
+    "animal": "pussycat",
     "hair": 1,
     "feathers": 0,
     "eggs": 0,
@@ -491,10 +491,10 @@
     "tail": 1,
     "domestic": 1,
     "catsize": 1,
-    "class_type": 4
+    "class": 4
   },
   {
-    "animal_name": "raccoon",
+    "animal": "raccoon",
     "hair": 1,
     "feathers": 0,
     "eggs": 0,
@@ -510,10 +510,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class_type": 4
+    "class": 4
   },
   {
-    "animal_name": "lobster",
+    "animal": "lobster",
     "hair": 0,
     "feathers": 0,
     "eggs": 1,
@@ -529,10 +529,10 @@
     "tail": 0,
     "domestic": 0,
     "catsize": 0,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "lynx",
+    "animal": "lynx",
     "hair": 1,
     "feathers": 0,
     "eggs": 0,
@@ -548,10 +548,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "seahorse",
+    "animal": "seahorse",
     "hair": 0,
     "feathers": 0,
     "eggs": 1,
@@ -567,10 +567,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 0,
-    "class_type": 4
+    "class": 4
   },
   {
-    "animal_name": "seal",
+    "animal": "seal",
     "hair": 1,
     "feathers": 0,
     "eggs": 0,
@@ -586,10 +586,10 @@
     "tail": 0,
     "domestic": 0,
     "catsize": 1,
-    "class_type": 4
+    "class": 4
   },
   {
-    "animal_name": "reindeer",
+    "animal": "reindeer",
     "hair": 1,
     "feathers": 0,
     "eggs": 0,
@@ -605,10 +605,10 @@
     "tail": 1,
     "domestic": 1,
     "catsize": 1,
-    "class_type": 4
+    "class": 4
   },
   {
-    "animal_name": "mink",
+    "animal": "mink",
     "hair": 1,
     "feathers": 0,
     "eggs": 0,
@@ -624,10 +624,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "mole",
+    "animal": "mole",
     "hair": 1,
     "feathers": 0,
     "eggs": 0,
@@ -643,10 +643,10 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 0,
-    "class_type": 2
+    "class": 2
   },
   {
-    "animal_name": "skimmer",
+    "animal": "skimmer",
     "hair": 0,
     "feathers": 1,
     "eggs": 1,
@@ -662,6 +662,6 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 0,
-    "class_type": 4
+    "class": 4
   }
 ]
