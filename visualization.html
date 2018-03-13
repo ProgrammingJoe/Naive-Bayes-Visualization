@@ -65,6 +65,7 @@ function spreadsheet2() {
         d3.select("#controls #buttons").insert("div", "#button4").on("click", generateProbabilities).html("4");
         d3.select("#controls #buttons").insert("div", "#button5").on("click", stackedBar).html("5");
 
+        // Not used, but arranges the rows back to normal
         function transitionSheet() {
           d3.selectAll("div.datarow")
             .transition()
@@ -72,6 +73,7 @@ function spreadsheet2() {
             .style("top", function(d,i) {return (40 + (i * 40)) + "px"});
         }
 
+        // Sorts by class
         function sortSheet() {
           var dataset = d3.selectAll("div.datarow").data();
 
@@ -87,6 +89,7 @@ function spreadsheet2() {
           .style("top", function(d,i) {return (40 + (i * 40))});
         }
 
+        // Highlight the class columns
         function highlightClasses() {
           d3.selectAll("div.datarow")
           .selectAll("div.data")
@@ -105,6 +108,7 @@ function spreadsheet2() {
         function mergeRows() {
           var dataset = d3.selectAll("div.datarow").data();
 
+          // Get sums
           d3.nest().key(function(d){
               return d.class;
           })
@@ -133,7 +137,6 @@ function spreadsheet2() {
               }
           }).entries(dataset)
           .map(function(d){
-              console.log(d);
               if(d.key === "2") {
                 class2.vals = Object.values(d.values);
               } else if (d.key === "4") {
@@ -141,6 +144,7 @@ function spreadsheet2() {
               }
           });
 
+          // Remove animal from header
           d3.select('div.head div:first-child').text('');
 
           // Merge all the class 2 rows to one location
@@ -198,23 +202,8 @@ function spreadsheet2() {
 
         // Sums the rows and divides by the number of classes
         function generateProbabilities() {
-          var dataset = d3.selectAll("div.datarow").data();
-
-          // d3.selectAll("div.datarow").data(dataset, function(d) {
-          //   if(d.animal === 'mole') {
-          //     return d.animal
-          //   }
-          // })
-          // .selectAll("div.data")
-          // .each(function (d, i) {
-          //   if(i === 0) {
-          //     d3.select(this).text('Probability');
-          //   } else if(d.class === 2) {
-          //     console.log(d3.select(this).text(d3.select(this).text()/class2.len));
-          //   } else if(d.class === 4) {
-          //     d3.select(this).text(d3.select(this).text()/class4.len)
-          //   }
-          // });
+          // Get the 2 count rows
+          // Divide each value by class#.len
         }
 
         // Converts the probabilities into a stacked bar chart
