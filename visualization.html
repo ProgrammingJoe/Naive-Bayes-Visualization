@@ -113,8 +113,8 @@ function spreadsheet2() {
               return d.class;
           })
           .rollup(function(v){
-            if(v.class === 2){class2.len = v.length;}
-            if(v.class === 4){class4.len = v.length;}
+            if(v[0].class === 2){class2.len = v.length;}
+            if(v[0].class === 4){class4.len = v.length;}
 
             return {
                 animal: v.animal,
@@ -202,8 +202,31 @@ function spreadsheet2() {
 
         // Sums the rows and divides by the number of classes
         function generateProbabilities() {
-          // Get the 2 count rows
-          // Divide each value by class#.len
+          var dataset = d3.selectAll("div.datarow").data();
+
+          d3.selectAll("div.datarow").data(dataset, function(d) {
+            if(d.animal === 'skimmer') {
+              return d.animal
+            }
+          })
+          .selectAll("div.data")
+          .each(function (d, i) {
+            if(d3.select(this).text() != 'count' && i != 16) {
+              d3.select(this).text((class4.vals[i]/class4.len).toFixed(2));
+            }
+          });
+
+          d3.selectAll("div.datarow").data(dataset, function(d) {
+            if(d.animal === 'mole') {
+              return d.animal
+            }
+          })
+          .selectAll("div.data")
+          .each(function (d, i) {
+            if(d3.select(this).text() != 'count' && i != 16) {
+              d3.select(this).text((class2.vals[i]/class2.len).toFixed(2));
+            }
+          });
         }
 
         // Converts the probabilities into a stacked bar chart
