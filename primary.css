@@ -75,3 +75,16 @@ div.table {
   border: 2px orange solid;
   line-height: 34px;
 }
+.stacked-row {
+  border: none !important;
+  height: 480px !important;
+}
+.stacked-blue-data {
+  background-color: lightblue;
+}
+.stacked-orange-data {
+  background-color: lightsalmon;
+}
+.bye-data {
+  visibility: hidden;
+}
