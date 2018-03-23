@@ -78,6 +78,7 @@ div.table {
 .stacked-row {
   border: none !important;
   height: 480px !important;
+  display: contents;
 }
 .stacked-blue-data {
   background-color: lightblue;
@@ -87,4 +88,7 @@ div.table {
 }
 .bye-data {
   visibility: hidden;
+}
+div.bye-row {
+  display: none;
 }

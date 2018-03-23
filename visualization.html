@@ -37,7 +37,7 @@ function spreadsheet2() {
         .data(keyValues)
         .enter()
         .append("div")
-        .attr("class", "data")
+        .attr("class", "data data-head")
         .html(function (d) {
           return d
         })
@@ -240,19 +240,32 @@ function spreadsheet2() {
         function stackedBar() {
           var dataset = d3.selectAll("div.datarow").data();
 
+          d3.select('div.head div:last-child').text('');
+
+          d3.selectAll("div.datarow").data(dataset, function(d) {
+            if(d.animal != 'skimmer' && d.animal != 'mole') {
+              return d.animal
+            }
+          })
+          .attr("class", "datarow bye-row");
+
           d3.selectAll("div.datarow").data(dataset, function(d) {
             if(d.animal === 'skimmer') {
+              console.log('orange row');
               return d.animal
             }
           })
           .attr("class", "datarow stacked-row")
-          .style("top", 280 + "px")
           .selectAll("div.data")
           .each(function (d, i) {
             if(d3.select(this).text() != 'count' && i != 16) {
+              fromtop = parseFloat(class2.feature_probs[i-1])/(parseFloat(class4.feature_probs[i-1]) + parseFloat(class2.feature_probs[i-1]))*500;
               height = parseFloat(class4.feature_probs[i-1])/(parseFloat(class4.feature_probs[i-1]) + parseFloat(class2.feature_probs[i-1]))*500;
-              d3.select(this).style("height", height + "px");
-              d3.select(this).style("line-height", height + "px");
+              d3.select(this).transition().duration(2000).style("height", height + "px")
+              .style("line-height", height + "px")
+              .style("top", fromtop+40 + "px")
+              .style("width", 68 + "px")
+              .style("margin-left", 6 + "px");
               d3.select(this).attr("class", "data stacked-orange-data");
             } else {
               d3.select(this).attr("class", "data bye-data");
@@ -269,9 +282,16 @@ function spreadsheet2() {
           .each(function (d, i) {
             if(d3.select(this).text() != 'count' && i != 16) {
               height = parseFloat(class2.feature_probs[i-1])/(parseFloat(class4.feature_probs[i-1]) + parseFloat(class2.feature_probs[i-1]))*500;
-              console.log(height);
-              d3.select(this).style("height", height + "px");
-              d3.select(this).style("line-height", height + "px");
+              d3.select(this).transition().duration(2000)
+              .style("height", height + "px")
+              .style("top", 40 + "px")
+              .style("width", 68 + "px")
+              .style("line-height", height + "px")
+              .style("margin-left", 6 + "px");
+
+              if(height == 0) {
+                d3.select(this).style("display", "none");
+              }
               d3.select(this).attr("class", "data stacked-blue-data");
             } else {
               d3.select(this).attr("class", "data bye-data");
