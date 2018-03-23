@@ -12,6 +12,7 @@ div.data {
   padding: 0 5px;
   text-align: center;
   line-height: 38px;
+  height: 38px;
 }
 
 div.data:first-child {
