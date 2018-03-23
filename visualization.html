@@ -64,6 +64,7 @@ function spreadsheet2() {
         d3.select("#controls #buttons").insert("div", "#button3").on("click", mergeRows).html("3");
         d3.select("#controls #buttons").insert("div", "#button4").on("click", generateProbabilities).html("4");
         d3.select("#controls #buttons").insert("div", "#button5").on("click", stackedBar).html("5");
+        d3.select("#controls #buttons").insert("div", "#button6").on("click", addInputs).html("6");
 
         // Not used, but arranges the rows back to normal
         function transitionSheet() {
@@ -95,9 +96,9 @@ function spreadsheet2() {
           .selectAll("div.data")
           .each(function (d, i) {
             if(i % 16 === 0){
-              if(d.value === 2) {
+              if(d.value === "Bird") {
                 d3.select(this).attr("class", "data blue-class");
-              } else if(d.value === 4){
+              } else if(d.value === "Fish"){
                 d3.select(this).attr("class", "data orange-class");
               }
             }
@@ -113,8 +114,8 @@ function spreadsheet2() {
               return d.class;
           })
           .rollup(function(v){
-            if(v[0].class === 2){class2.len = v.length;}
-            if(v[0].class === 4){class4.len = v.length;}
+            if(v[0].class === "Bird"){class2.len = v.length;}
+            if(v[0].class === "Fish"){class4.len = v.length;}
 
             return {
                 animal: v.animal,
@@ -137,9 +138,9 @@ function spreadsheet2() {
               }
           }).entries(dataset)
           .map(function(d){
-              if(d.key === "2") {
+              if(d.key === "Bird") {
                 class2.vals = Object.values(d.values);
-              } else if (d.key === "4") {
+              } else if (d.key === "Fish") {
                 class4.vals = Object.values(d.values);
               }
           });
@@ -149,7 +150,7 @@ function spreadsheet2() {
 
           // Merge all the class 2 rows to one location
           d3.selectAll("div.datarow").data(dataset, function(d) {
-            if(d.class === 2) {
+            if(d.class === "Bird") {
               return d.animal
             }
           })
@@ -167,7 +168,7 @@ function spreadsheet2() {
           .each(function (d, i) {
             d3.select(this).text(class2.vals[i]);
             if(i === class2.vals.length - 1) {
-              d3.select(this).text(2);
+              d3.select(this).text("Bird");
             } else if(i === 0) {
               d3.select(this).text('count');
             }
@@ -175,7 +176,7 @@ function spreadsheet2() {
 
           // Merge all the class 4 rows to one location
           d3.selectAll("div.datarow").data(dataset, function(d) {
-            if(d.class === 4) {
+            if(d.class === "Fish") {
               return d.animal
             }
           })
@@ -193,7 +194,7 @@ function spreadsheet2() {
           .each(function (d, i) {
             d3.select(this).text(class4.vals[i]);
             if(i === class4.vals.length - 1) {
-              d3.select(this).text(4);
+              d3.select(this).text("Fish");
             } else if(i === 0) {
               d3.select(this).text('count');
             }
@@ -239,8 +240,6 @@ function spreadsheet2() {
         // Converts the probabilities into a stacked bar chart
         function stackedBar() {
           var dataset = d3.selectAll("div.datarow").data();
-
-          d3.select('div.head div:last-child').text('');
 
           d3.selectAll("div.datarow").data(dataset, function(d) {
             if(d.animal != 'skimmer' && d.animal != 'mole') {
@@ -298,6 +297,34 @@ function spreadsheet2() {
             }
           });
         }
+
+        function addInputs() {
+          d3.select("div .table")
+          .style("height", 600 + "px");
+
+          d3.select("#controls")
+          .append("div")
+          .attr("class", "inputs");
+
+          d3.select("#controls .inputs").insert("input");
+          d3.select("#controls .inputs").insert("input");
+          d3.select("#controls .inputs").insert("input");
+          d3.select("#controls .inputs").insert("input");
+          d3.select("#controls .inputs").insert("input");
+          d3.select("#controls .inputs").insert("input");
+          d3.select("#controls .inputs").insert("input");
+          d3.select("#controls .inputs").insert("input");
+          d3.select("#controls .inputs").insert("input");
+          d3.select("#controls .inputs").insert("input");
+          d3.select("#controls .inputs").insert("input");
+          d3.select("#controls .inputs").insert("input");
+          d3.select("#controls .inputs").insert("input");
+          d3.select("#controls .inputs").insert("input");
+          d3.select("#controls .inputs").insert("input");
+
+        }
+
+
       }
 }
 
