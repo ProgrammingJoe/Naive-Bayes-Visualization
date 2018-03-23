@@ -16,7 +16,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 0,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "ladybird",
@@ -35,7 +35,7 @@
     "tail": 0,
     "domestic": 0,
     "catsize": 0,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "lark",
@@ -54,7 +54,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 0,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "leopard",
@@ -73,7 +73,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "lion",
@@ -92,7 +92,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "rhea",
@@ -111,7 +111,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class": 4
+    "class": "Fish"
   },
   {
     "animal": "scorpion",
@@ -130,7 +130,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 0,
-    "class": 4
+    "class": "Fish"
   },
   {
     "animal": "penguin",
@@ -149,7 +149,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "puma",
@@ -168,7 +168,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class": 4
+    "class": "Fish"
   },
   {
     "animal": "mongoose",
@@ -187,7 +187,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "moth",
@@ -206,7 +206,7 @@
     "tail": 0,
     "domestic": 0,
     "catsize": 0,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "newt",
@@ -225,7 +225,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 0,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "octopus",
@@ -244,7 +244,7 @@
     "tail": 0,
     "domestic": 0,
     "catsize": 1,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "opossum",
@@ -263,7 +263,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 0,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "sealion",
@@ -282,7 +282,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class": 4
+    "class": "Fish"
   },
   {
     "animal": "seasnake",
@@ -301,7 +301,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 0,
-    "class": 4
+    "class": "Fish"
   },
   {
     "animal": "seawasp",
@@ -320,7 +320,7 @@
     "tail": 0,
     "domestic": 0,
     "catsize": 0,
-    "class": 4
+    "class": "Fish"
   },
   {
     "animal": "oryx",
@@ -339,7 +339,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "ostrich",
@@ -358,7 +358,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "parakeet",
@@ -377,7 +377,7 @@
     "tail": 1,
     "domestic": 1,
     "catsize": 0,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "penguin",
@@ -396,7 +396,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "pheasant",
@@ -415,7 +415,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 0,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "pike",
@@ -434,7 +434,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "porpoise",
@@ -453,7 +453,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class": 4
+    "class": "Fish"
   },
   {
     "animal": "puma",
@@ -472,7 +472,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class": 4
+    "class": "Fish"
   },
   {
     "animal": "pussycat",
@@ -491,7 +491,7 @@
     "tail": 1,
     "domestic": 1,
     "catsize": 1,
-    "class": 4
+    "class": "Fish"
   },
   {
     "animal": "raccoon",
@@ -510,7 +510,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class": 4
+    "class": "Fish"
   },
   {
     "animal": "lobster",
@@ -529,7 +529,7 @@
     "tail": 0,
     "domestic": 0,
     "catsize": 0,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "lynx",
@@ -548,7 +548,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "seahorse",
@@ -567,7 +567,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 0,
-    "class": 4
+    "class": "Fish"
   },
   {
     "animal": "seal",
@@ -586,7 +586,7 @@
     "tail": 0,
     "domestic": 0,
     "catsize": 1,
-    "class": 4
+    "class": "Fish"
   },
   {
     "animal": "reindeer",
@@ -605,7 +605,7 @@
     "tail": 1,
     "domestic": 1,
     "catsize": 1,
-    "class": 4
+    "class": "Fish"
   },
   {
     "animal": "mink",
@@ -624,7 +624,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 1,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "mole",
@@ -643,7 +643,7 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 0,
-    "class": 2
+    "class": "Bird"
   },
   {
     "animal": "skimmer",
@@ -662,6 +662,6 @@
     "tail": 1,
     "domestic": 0,
     "catsize": 0,
-    "class": 4
+    "class": "Fish"
   }
 ]

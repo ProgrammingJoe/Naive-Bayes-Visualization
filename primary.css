@@ -38,13 +38,13 @@ div.datarow {
 div.table {
   position:relative;
   width: 1478px;
-  margin: 0px auto 100px auto;
+  margin: 0 auto;
   height: 1442px;
   display: block;
 }
 
 #buttons {
-  width: 310px;
+  width: 372px;
   margin: 10px auto;
 }
 #buttons div {
@@ -91,4 +91,13 @@ div.table {
 }
 div.bye-row {
   display: none;
+}
+
+.inputs {
+  width: 1290px;
+  margin: 0 auto;
+}
+input {
+  width: 82px;
+  margin: 0 2px;
 }
