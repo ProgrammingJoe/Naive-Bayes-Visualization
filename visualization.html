@@ -298,12 +298,12 @@ function spreadsheet2() {
               d3.select(this).attr("class", "data bye-data");
             }
           });
+
+          d3.select("div .table")
+          .style("height", 470 + "px");
         }
 
         function addInputs() {
-          d3.select("div .table")
-          .style("height", 600 + "px");
-
           d3.select("#controls")
           .append("div")
           .attr("class", "inputs");

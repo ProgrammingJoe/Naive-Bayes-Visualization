@@ -69,12 +69,12 @@ div.table {
 }
 
 .blue-class {
-  border: 2px blue solid;
-  line-height: 34px;
+  background-color: lightblue;
+  border-right: 4px solid lightblue;
 }
 .orange-class {
-  border: 2px orange solid;
-  line-height: 34px;
+  background-color: lightsalmon;
+  border-right: 4px solid lightsalmon;
 }
 .stacked-row {
   border: none !important;
