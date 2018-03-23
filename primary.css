@@ -39,13 +39,13 @@ div.datarow {
 div.table {
   position:relative;
   width: 1478px;
-  margin: 0px auto 100px auto;
+  margin: 0 auto;
   height: 1442px;
   display: block;
 }
 
 #buttons {
-  width: 310px;
+  width: 372px;
   margin: 10px auto;
 }
 #buttons div {
@@ -75,4 +75,30 @@ div.table {
 .orange-class {
   border: 2px orange solid;
   line-height: 34px;
+}
+.stacked-row {
+  border: none !important;
+  height: 480px !important;
+  display: contents;
+}
+.stacked-blue-data {
+  background-color: lightblue;
+}
+.stacked-orange-data {
+  background-color: lightsalmon;
+}
+.bye-data {
+  visibility: hidden;
+}
+div.bye-row {
+  display: none;
+}
+
+.inputs {
+  width: 1290px;
+  margin: 0 auto;
+}
+input {
+  width: 82px;
+  margin: 0 2px;
 }
