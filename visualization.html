@@ -59,20 +59,12 @@ function spreadsheet2() {
         .html(function (d) {return d.value})
         .style("left", function(d,i,j) {return (i * 86) + "px"});
 
-        d3.select("#controls #buttons").insert("div", "#button1").on("click", highlightClasses).html("1");
-        d3.select("#controls #buttons").insert("div", "#button2").on("click", sortSheet).html("2");
-        d3.select("#controls #buttons").insert("div", "#button3").on("click", mergeRows).html("3");
-        d3.select("#controls #buttons").insert("div", "#button4").on("click", generateProbabilities).html("4");
-        d3.select("#controls #buttons").insert("div", "#button5").on("click", stackedBar).html("5");
-        d3.select("#controls #buttons").insert("div", "#button6").on("click", addInputs).html("6");
-
-        // Not used, but arranges the rows back to normal
-        function transitionSheet() {
-          d3.selectAll("div.datarow")
-            .transition()
-            .duration(2000)
-            .style("top", function(d,i) {return (40 + (i * 40)) + "px"});
-        }
+        d3.select("#controls #buttons").append("div").attr("id", "button1").on("click", highlightClasses).html("1");
+        d3.select("#controls #buttons").append("div").attr("id", "button2").attr("class", "not-active").on("click", sortSheet).html("2");
+        d3.select("#controls #buttons").append("div").attr("id", "button3").attr("class", "not-active").on("click", mergeRows).html("3");
+        d3.select("#controls #buttons").append("div").attr("id", "button4").attr("class", "not-active").on("click", generateProbabilities).html("4");
+        d3.select("#controls #buttons").append("div").attr("id", "button5").attr("class", "not-active").on("click", stackedBar).html("5");
+        d3.select("#controls #buttons").append("div").attr("id", "button6").attr("class", "not-active").on("click", addInputs).html("6");
 
         // Sorts by class
         function sortSheet() {
@@ -88,6 +80,9 @@ function spreadsheet2() {
           .transition()
           .duration(2000)
           .style("top", function(d,i) {return (40 + (i * 40))});
+
+          d3.select("#button2").attr("class", "not-active");
+          d3.select("#button3").attr("class", "");
         }
 
         // Highlight the class columns
@@ -103,6 +98,9 @@ function spreadsheet2() {
               }
             }
           });
+
+          d3.select("#button1").attr("class", "not-active");
+          d3.select("#button2").attr("class", "");
         }
 
         // Merges the rows of the table
@@ -199,6 +197,9 @@ function spreadsheet2() {
               d3.select(this).text('count');
             }
           });
+
+          d3.select("#button3").attr("class", "not-active");
+          d3.select("#button4").attr("class", "");
         }
 
         // Sums the rows and divides by the number of classes
@@ -235,6 +236,9 @@ function spreadsheet2() {
               d3.select(this).text(prob);
             }
           });
+
+          d3.select("#button4").attr("class", "not-active");
+          d3.select("#button5").attr("class", "");
         }
 
         // Converts the probabilities into a stacked bar chart
@@ -252,7 +256,6 @@ function spreadsheet2() {
 
           d3.selectAll("div.datarow").data(dataset, function(d) {
             if(d.animal === 'skimmer') {
-              console.log('orange row');
               return d.animal
             }
           })
@@ -262,14 +265,15 @@ function spreadsheet2() {
             if(d3.select(this).text() != 'count' && i != 16) {
               fromtop = parseFloat(class2.feature_probs[i-1])/(parseFloat(class4.feature_probs[i-1]) + parseFloat(class2.feature_probs[i-1]))*400;
               height = parseFloat(class4.feature_probs[i-1])/(parseFloat(class4.feature_probs[i-1]) + parseFloat(class2.feature_probs[i-1]))*400;
+              d3.select(this).style("top", 80 + "px");
+              d3.select(this).style("width", 68 + "px");
+              d3.select(this).style("margin-left", 6 + "px");
               d3.select(this).transition().duration(2000).style("height", height + "px")
               .style("line-height", height + "px")
-              .style("top", fromtop+40 + "px")
-              .style("width", 68 + "px")
-              .style("margin-left", 6 + "px");
+              .style("top", fromtop+44 + "px");
               d3.select(this).attr("class", "data stacked-orange-data");
             } else {
-              d3.select(this).attr("class", "data bye-data");
+              d3.select(this).transition().duration(2000).attr("class", "data bye-data");
             }
           });
 
@@ -282,13 +286,13 @@ function spreadsheet2() {
           .selectAll("div.data")
           .each(function (d, i) {
             if(d3.select(this).text() != 'count' && i != 16) {
-              height = parseFloat(class2.feature_probs[i-1])/(parseFloat(class4.feature_probs[i-1]) + parseFloat(class2.feature_probs[i-1]))*500;
+              height = parseFloat(class2.feature_probs[i-1])/(parseFloat(class4.feature_probs[i-1]) + parseFloat(class2.feature_probs[i-1]))*400;
+              d3.select(this).style("top", 40 + "px");
+              d3.select(this).style("width", 68 + "px");
+              d3.select(this).style("margin-left", 6 + "px");
               d3.select(this).transition().duration(2000)
               .style("height", height + "px")
-              .style("top", 40 + "px")
-              .style("width", 68 + "px")
-              .style("line-height", height + "px")
-              .style("margin-left", 6 + "px");
+              .style("line-height", height + "px");
 
               if(height == 0) {
                 d3.select(this).style("display", "none");
@@ -301,6 +305,9 @@ function spreadsheet2() {
 
           d3.select("div .table")
           .style("height", 470 + "px");
+
+          d3.select("#button5").attr("class", "not-active");
+          d3.select("#button6").attr("class", "");
         }
 
         function addInputs() {
@@ -324,10 +331,46 @@ function spreadsheet2() {
           d3.select("#controls .inputs").insert("input");
           d3.select("#controls .inputs").insert("input");
 
+          d3.select("#controls .inputs").append("div").attr("id", "classify-button").on("click", classifyInput).html("Classify");
+
+          d3.select("#button6").attr("class", "not-active");
+        }
+
+        function classifyInput() {
+          var dataset = d3.selectAll("div.datarow").data();
+
+          d3.selectAll("div.datarow").data(dataset, function(d) {
+            if(d.animal === 'skimmer') {
+              return d.animal
+            }
+          })
+          .attr("class", "datarow stacked-row")
+          .selectAll("div.data")
+          .each(function (d, i) {
+            if(d3.select(this).text() != 'count' && i != 16) {
+              d3.select(this).style("border", "2px solid orange"); // Set bright border
+              d3.select(this).style("width", 66 + "px");
+            }
+          });
+
+          d3.selectAll("div.datarow").data(dataset, function(d) {
+            if(d.animal === 'mole') {
+              return d.animal
+            }
+          })
+          .attr("class", "datarow stacked-row")
+          .selectAll("div.data")
+          .each(function (d, i) {
+            if(d3.select(this).text() != 'count' && i != 16) {
+              d3.select(this).style("border", "2px solid blue"); // Set bright border
+              d3.select(this).style("width", 66 + "px");
+
+            }
+          });
         }
 
 
-      }
+      } // End createSpreadsheet
 }
 
 </script>
