@@ -7,7 +7,9 @@
 <script src="http://d3js.org/d3.v3.min.js" type="text/javascript">
 </script>
 <body onload="spreadsheet2();">
-<p class="title">Naive Bayes Visualization</p>
+  <div class="title-block">
+    <p class="title">Naive Bayes Visualization</p>
+  </div>
 <div id="controls">
   <div id="buttons" />
 </div>
@@ -266,7 +268,7 @@ function spreadsheet2() {
               fromtop = parseFloat(class2.feature_probs[i-1])/(parseFloat(class4.feature_probs[i-1]) + parseFloat(class2.feature_probs[i-1]))*400;
               height = parseFloat(class4.feature_probs[i-1])/(parseFloat(class4.feature_probs[i-1]) + parseFloat(class2.feature_probs[i-1]))*400;
               d3.select(this).style("top", 80 + "px");
-              d3.select(this).style("width", 68 + "px");
+              d3.select(this).style("width", 66 + "px");
               d3.select(this).style("margin-left", 6 + "px");
               d3.select(this).transition().duration(2000).style("height", height + "px")
               .style("line-height", height + "px")
@@ -288,7 +290,7 @@ function spreadsheet2() {
             if(d3.select(this).text() != 'count' && i != 16) {
               height = parseFloat(class2.feature_probs[i-1])/(parseFloat(class4.feature_probs[i-1]) + parseFloat(class2.feature_probs[i-1]))*400;
               d3.select(this).style("top", 40 + "px");
-              d3.select(this).style("width", 68 + "px");
+              d3.select(this).style("width", 66 + "px");
               d3.select(this).style("margin-left", 6 + "px");
               d3.select(this).transition().duration(2000)
               .style("height", height + "px")
@@ -314,22 +316,20 @@ function spreadsheet2() {
           d3.select("#controls")
           .append("div")
           .attr("class", "inputs");
+          d3.select("#controls")
+          .append("div")
+          .attr("class", "computations-class-1");
+          d3.select("#controls")
+          .append("div")
+          .attr("class", "computations-class-2");
 
-          d3.select("#controls .inputs").insert("input");
-          d3.select("#controls .inputs").insert("input");
-          d3.select("#controls .inputs").insert("input");
-          d3.select("#controls .inputs").insert("input");
-          d3.select("#controls .inputs").insert("input");
-          d3.select("#controls .inputs").insert("input");
-          d3.select("#controls .inputs").insert("input");
-          d3.select("#controls .inputs").insert("input");
-          d3.select("#controls .inputs").insert("input");
-          d3.select("#controls .inputs").insert("input");
-          d3.select("#controls .inputs").insert("input");
-          d3.select("#controls .inputs").insert("input");
-          d3.select("#controls .inputs").insert("input");
-          d3.select("#controls .inputs").insert("input");
-          d3.select("#controls .inputs").insert("input");
+          d3.select("#controls").transition().duration(2000).style("top", -76 + "px");
+
+          for(var i = 0; i < 15; i++) {
+            d3.select("#controls .inputs").insert("input");
+            d3.select("#controls .computations-class-1").append("div").attr("class", "computation-number");
+            d3.select("#controls .computations-class-2").append("div").attr("class", "computation-number");
+          }
 
           d3.select("#controls .inputs").append("div").attr("id", "classify-button").on("click", classifyInput).html("Classify");
 
@@ -338,19 +338,34 @@ function spreadsheet2() {
 
         function classifyInput() {
           var dataset = d3.selectAll("div.datarow").data();
+          var inputs = [];
 
-          d3.selectAll("div.datarow").data(dataset, function(d) {
-            if(d.animal === 'skimmer') {
-              return d.animal
-            }
-          })
-          .attr("class", "datarow stacked-row")
-          .selectAll("div.data")
+          class4.class_prob = 1;
+          class2.class_prob = 2;
+
+          d3.selectAll("input")
           .each(function (d, i) {
-            if(d3.select(this).text() != 'count' && i != 16) {
-              d3.select(this).style("border", "2px solid orange"); // Set bright border
-              d3.select(this).style("width", 66 + "px");
+            var value = d3.select(this)[0][0].value;
+            if(value) {
+              inputs.push(parseInt(d3.select(this)[0][0].value));
+            } else {
+              inputs.push(0);
             }
+          });
+
+          d3.selectAll(".computations-class-1 div.computation-number")
+          .data(class2.feature_probs)
+          .each(function (d, i) {
+            d3.select(this).style("opacity", 0);
+            if(inputs[i] != 0) {
+              class2.class_prob *= d;
+              d3.select(this).text(d + "  x");
+            } else {
+              class2.class_prob *= (1-d);
+              d3.select(this).text("1 - " + d + "  x");
+            }
+            d3.select(this).transition().delay(800*i).duration(800).style("opacity", 1);
+
           });
 
           d3.selectAll("div.datarow").data(dataset, function(d) {
@@ -362,11 +377,48 @@ function spreadsheet2() {
           .selectAll("div.data")
           .each(function (d, i) {
             if(d3.select(this).text() != 'count' && i != 16) {
-              d3.select(this).style("border", "2px solid blue"); // Set bright border
+              d3.select(this).style("border", "none")
+              if(i < 8) {
+                d3.select(this).transition().delay(700*i).duration(800).style("background-color", "#1DA6E1"); // Set bright border
+              } else {
+                d3.select(this).transition().delay(750*i).duration(800).style("background-color", "#1DA6E1"); // Set bright border
+              }
               d3.select(this).style("width", 66 + "px");
-
             }
           });
+
+          d3.selectAll(".computations-class-2 div.computation-number")
+          .data(class4.feature_probs)
+          .each(function (d, i) {
+            d3.select(this).style("opacity", 0);
+            if(inputs[i] != 0) {
+              class4.class_prob *= d;
+              d3.select(this).text(d + "  x");
+            } else {
+              class4.class_prob *= (1-d);
+              d3.select(this).text("1 - " + d + "  x");
+            }
+            d3.select(this).transition().delay(800*i + 13000).duration(800).style("opacity", 1);
+
+          });
+
+          d3.selectAll("div.datarow").data(dataset, function(d) {
+            if(d.animal === 'skimmer') {
+              return d.animal
+            }
+          })
+          .attr("class", "datarow stacked-row")
+          .selectAll("div.data")
+          .each(function (d, i) {
+            if(d3.select(this).text() != 'count' && i != 16) {
+              d3.select(this).style("border", "none")
+              d3.select(this).transition().delay(750*i + 13000).duration(800).style("background-color", "#F47738"); // Set bright border
+              d3.select(this).style("width", 66 + "px");
+            }
+          });
+
+          console.log(class2.class_prob);
+          console.log(class4.class_prob);
         }
 
 

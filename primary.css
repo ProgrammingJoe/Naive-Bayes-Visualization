@@ -62,12 +62,12 @@ div.table {
 }
 
 .blue-class {
-  background-color: lightblue;
-  border-right: 4px solid lightblue;
+  background-color: #63C5F0;
+  border-right: 4px solid #63C5F0;
 }
 .orange-class {
-  background-color: lightsalmon;
-  border-right: 4px solid lightsalmon;
+  background-color: #F9AF67;
+  border-right: 4px solid #F9AF67;
 }
 .stacked-row {
   border: none !important;
@@ -75,10 +75,10 @@ div.table {
   display: contents;
 }
 .stacked-blue-data {
-  background-color: lightblue;
+  background-color: #63C5F0;
 }
 .stacked-orange-data {
-  background-color: lightsalmon;
+  background-color: #F9AF67;
 }
 .bye-data {
   visibility: hidden;
@@ -87,7 +87,9 @@ div.bye-row {
   display: none;
 }
 
-.inputs {
+.inputs,
+.computations-class-1,
+.computations-class-2 {
   width: 1290px;
   margin: 0 auto;
 }
@@ -112,4 +114,23 @@ input {
   text-decoration:none;
   color: grey;
   border: 1px solid grey !important;
+}
+
+.title-block {
+  position: relative;
+  background-color: white;
+  z-index: 1;
+  height: 64px;
+}
+
+#controls {
+  position: relative;
+}
+
+.computation-number {
+  width: 86px;
+  height: 40px;
+  display: inline-block;
+  line-height: 40px;
+  text-align: center;
 }
