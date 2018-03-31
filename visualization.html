@@ -84,7 +84,7 @@ function spreadsheet2() {
           .style("top", function(d,i) {return (40 + (i * 40))});
 
           d3.select("#button2").attr("class", "not-active");
-          d3.select("#button3").attr("class", "");
+          d3.select("#button3").transition().delay(2000).attr("class", "");
         }
 
         // Highlight the class columns
@@ -108,6 +108,19 @@ function spreadsheet2() {
         // Merges the rows of the table
         function mergeRows() {
           var dataset = d3.selectAll("div.datarow").data();
+
+          d3.selectAll("div.datarow").data(dataset, function(d) {
+            if(d.class === "Bird") {
+              return d.animal
+            }
+          })
+          .selectAll("div.data")
+          .each(function (d, i) {
+            console.log(d);
+            if(d.key == "hair" && d.value === 1){
+              d3.select(this).attr("class", "data box-highlight");
+            }
+          });
 
           // Get sums
           d3.nest().key(function(d){
@@ -155,6 +168,7 @@ function spreadsheet2() {
             }
           })
           .transition()
+          .delay(1000)
           .duration(2000)
           .style("top", 40);
 
@@ -166,11 +180,11 @@ function spreadsheet2() {
           })
           .selectAll("div.data")
           .each(function (d, i) {
-            d3.select(this).text(class2.vals[i]);
+            d3.select(this).transition().delay(2000).text(class2.vals[i]);
             if(i === class2.vals.length - 1) {
-              d3.select(this).text("Bird");
+              d3.select(this).transition().delay(2000).text("Bird");
             } else if(i === 0) {
-              d3.select(this).text('count');
+              d3.select(this).transition().delay(2000).text('count');
             }
           });
 
@@ -181,8 +195,16 @@ function spreadsheet2() {
             }
           })
           .transition()
+          .delay(1000)
           .duration(2000)
           .style("top", 80);
+
+
+          d3.select("div .table")
+          .transition()
+          .delay(1000)
+          .duration(2000)
+          .style("height", 130 + "px");
 
           // Change merged row values to sums
           d3.selectAll("div.datarow").data(dataset, function(d) {
@@ -192,16 +214,20 @@ function spreadsheet2() {
           })
           .selectAll("div.data")
           .each(function (d, i) {
-            d3.select(this).text(class4.vals[i]);
+            d3.select(this).transition().delay(2000).text(class4.vals[i]);
             if(i === class4.vals.length - 1) {
-              d3.select(this).text("Fish");
+              d3.select(this).transition().delay(2000).text("Fish");
             } else if(i === 0) {
-              d3.select(this).text('count');
+              d3.select(this).transition().delay(2000).text('count');
             }
           });
 
+          d3.select("#controls").append("div").attr("class", "class-counts");
+          d3.select("#controls .class-counts").append("p").attr("class", "class-count-1").text("Bird Class Count: " + class2.len);
+          d3.select("#controls .class-counts").append("p").attr("class", "class-count-2").text("Fish Class Count: " + class4.len);
+
           d3.select("#button3").attr("class", "not-active");
-          d3.select("#button4").attr("class", "");
+          d3.select("#button4").transition().delay(2500).attr("class", "");
         }
 
         // Sums the rows and divides by the number of classes
@@ -221,7 +247,8 @@ function spreadsheet2() {
             if(d3.select(this).text() != 'count' && i != 16) {
               var prob = (class4.vals[i]/class4.len).toFixed(2)
               class4.feature_probs.push(prob)
-              d3.select(this).text(prob);
+              d3.select(this).transition().delay(600*i).text(class4.vals[i] + "/" + class4.len);
+              d3.select(this).transition().delay(10000).text(prob);
             }
           });
 
@@ -235,18 +262,21 @@ function spreadsheet2() {
             if(d3.select(this).text() != 'count' && i != 16) {
               var prob = (class2.vals[i]/class2.len).toFixed(2)
               class2.feature_probs.push(prob)
-              d3.select(this).text(prob);
+              d3.select(this).transition().delay(600*i).text(class2.vals[i] + "/" + class2.len);
+              d3.select(this).transition().delay(10000).text(prob);
             }
           });
 
           d3.select("#button4").attr("class", "not-active");
-          d3.select("#button5").attr("class", "");
+          d3.select("#button5").transition().delay(10500).attr("class", "");
         }
 
         // Converts the probabilities into a stacked bar chart
         function stackedBar() {
           var dataset = d3.selectAll("div.datarow").data();
 
+          d3.select('#controls .class-counts').transition().duration(1000).style("opacity", "0");
+          d3.select('#controls .class-counts').transition().delay(1000).style("position", "absolute");
           d3.select('div.head div:last-child').text('');
 
           d3.selectAll("div.datarow").data(dataset, function(d) {
@@ -306,6 +336,8 @@ function spreadsheet2() {
           });
 
           d3.select("div .table")
+          .transition()
+          .duration(2000)
           .style("height", 470 + "px");
 
           d3.select("#button5").attr("class", "not-active");
@@ -365,7 +397,6 @@ function spreadsheet2() {
               d3.select(this).text("1 - " + d + "  x");
             }
             d3.select(this).transition().delay(800*i).duration(800).style("opacity", 1);
-
           });
 
           d3.selectAll("div.datarow").data(dataset, function(d) {
@@ -377,7 +408,7 @@ function spreadsheet2() {
           .selectAll("div.data")
           .each(function (d, i) {
             if(d3.select(this).text() != 'count' && i != 16) {
-              d3.select(this).style("border", "none")
+              d3.select(this).style("background-color", "#63C5F0");
               if(i < 8) {
                 d3.select(this).transition().delay(700*i).duration(800).style("background-color", "#1DA6E1"); // Set bright border
               } else {
@@ -399,7 +430,6 @@ function spreadsheet2() {
               d3.select(this).text("1 - " + d + "  x");
             }
             d3.select(this).transition().delay(800*i + 13000).duration(800).style("opacity", 1);
-
           });
 
           d3.selectAll("div.datarow").data(dataset, function(d) {
@@ -411,7 +441,7 @@ function spreadsheet2() {
           .selectAll("div.data")
           .each(function (d, i) {
             if(d3.select(this).text() != 'count' && i != 16) {
-              d3.select(this).style("border", "none")
+              d3.select(this).style("background-color", "#F9AF67");
               d3.select(this).transition().delay(750*i + 13000).duration(800).style("background-color", "#F47738"); // Set bright border
               d3.select(this).style("width", 66 + "px");
             }
