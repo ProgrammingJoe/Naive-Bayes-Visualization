@@ -134,7 +134,12 @@ input {
   line-height: 40px;
   text-align: center;
 }
-
+.computations-class-1 {
+  background-color: #63C5F0;
+}
+.computations-class-2 {
+  background-color: #F9AF67;
+}
 .box-highlight {
   background-color: #81D381;
   margin: 0 16px;
@@ -161,4 +166,18 @@ input {
 .class-count-2 {
   background-color: #F9AF67;
   text-align: left;
+}
+
+.computations {
+  width: 1290px;
+  margin: 0 auto;
+}
+.probabilities {
+  margin-bottom: 20px;
+}
+
+.result {
+  width: 166px;
+  font-size: 20px;
+  margin: 10px auto 0 auto;
 }
