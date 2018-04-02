@@ -1,130 +1,183 @@
-body{
-  margin: 0;
-  font-family: arial, sans;
+div.data {
+  position: absolute;
+  width: 84px;
+  padding: 0 5px;
+  text-align: center;
+  line-height: 38px;
+  height: 38px;
 }
-.container {
-  width: 960px;
+
+div.data:first-child {
+  width: 90px;
+  border-right: 2px solid black;
 }
-.buttons {
-  margin: auto;
-  width: 100%;
-  margin: 0 50px;
+div.head div:first-child {
+  border-right: 0px;
 }
-.button {
-  margin: 0 20px;
-  width: 60px;
-  height: 30px;
-  display: inline;
+
+div.head {
+  position: absolute;
 }
-.button:hover {
+
+div.datarow {
+  position: absolute;
+  width: 1474px;
+  border: 2px solid black;
+  background: white;
+  height: 38px;
+  overflow: hidden;
+}
+
+div.table {
+  position:relative;
+  width: 1478px;
+  margin: 0 auto;
+  height: 1442px;
+  display: block;
+}
+
+#buttons {
+  width: 372px;
+  margin: 10px auto;
+}
+#buttons div {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin: 5px;
+  display: inline-block;
+  text-align: center;
+  line-height: 50px;
+  border: 1px solid black;
+}
+#buttons div:hover,
+#classify-button:hover {
   cursor: pointer;
+  opacity: 0.7;
+}
+.title {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 28px;
 }
 
-
-
-
-* {
-  margin: 0;
-  padding: 0;
-   }
-   body {
-   font: 14px/1.4 Georgia, Serif;
-   }
-  #page-wrap {
-  margin: 50px;
-  }
-  p {
- margin: 20px 0;
-  }
-
-/*
-Generic Styling, for Desktops/Laptops
-*/
-table {
-  width: 100%;
-  border-collapse: collapse;
+.blue-class {
+  background-color: #63C5F0;
+  border-right: 4px solid #63C5F0;
+}
+.orange-class {
+  background-color: #F9AF67;
+  border-right: 4px solid #F9AF67;
+}
+.stacked-row {
+  border: none !important;
+  height: 480px !important;
+  display: contents;
+}
+.stacked-blue-data {
+  background-color: #63C5F0;
+}
+.stacked-orange-data {
+  background-color: #F9AF67;
+}
+.bye-data {
+  visibility: hidden;
+}
+div.bye-row {
+  display: none;
 }
 
-th {
-  background: #333;
-  color: white;
-  font-weight: bold;
-  cursor: s-resize;
-  background-repeat: no-repeat;
-      background-position: 3% center;
+.inputs,
+.computations-class-1,
+.computations-class-2 {
+  width: 1290px;
+  margin: 0 auto;
 }
-td, th {
-  padding: 6px;
-  border: 1px solid #ccc;
+input {
+  width: 82px;
+  margin: 0 2px;
+}
+
+#classify-button {
+  width: 180px;
+  height: 50px;
+  margin: 30px auto;
+  line-height: 50px;
+  background-color: lightgreen;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.not-active {
+  pointer-events: none;
+  cursor: default;
+  text-decoration:none;
+  color: grey;
+  border: 1px solid grey !important;
+}
+
+.title-block {
+  position: relative;
+  background-color: white;
+  z-index: 1;
+  height: 64px;
+}
+
+#controls {
+  position: relative;
+}
+
+.computation-number {
+  width: 86px;
+  height: 40px;
+  display: inline-block;
+  line-height: 40px;
+  text-align: center;
+}
+.computations-class-1 {
+  background-color: #63C5F0;
+}
+.computations-class-2 {
+  background-color: #F9AF67;
+}
+.box-highlight {
+  background-color: #81D381;
+  margin: 0 16px;
+  padding: 0 !important;
+  width: 62px !important;
+}
+
+.class-counts {
+  margin: 0 auto;
+  width: 440px;
+}
+.class-count-1,
+.class-count-2 {
+  display: inline-block;
+  width: 190px;
+  padding: 0 15px;
+}
+
+.class-count-1 {
+  background-color: #63C5F0;
+  text-align: right;
+}
+
+.class-count-2 {
+  background-color: #F9AF67;
   text-align: left;
 }
 
-/*
-Max width before this PARTICULAR table gets nasty
-This query will take effect for any screen smaller than 760px
-and also iPads specifically.
-*/
-@media
-only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
-
-  /* Force table to not be like tables anymore */
-  table, thead, tbody, th, td, tr {
-    display: block;
-  }
-
-  /* Hide table headers (but not display: none;, for accessibility) */
-  thead tr {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-  }
-
-  tr { border: 1px solid #ccc; }
-
-  td {
-    /* Behave  like a "row" */
-    border: none;
-    border-bottom: 1px solid #eee;
-    position: relative;
-    padding-left: 50%;
-  }
-
-  td:before {
-    /* Now like a table header */
-    position: absolute;
-    /* Top/left values mimic padding */
-    top: 6px;
-    left: 6px;
-    width: 45%;
-    padding-right: 10px;
-    white-space: nowrap;
-  }
-
-  /*
-  Label the data
-  */
-  td:before {
-    content: attr(data-th) ": ";
-        font-weight: bold;
-        width: 6.5em;
-        display: inline-block;
-  }
+.computations {
+  width: 1290px;
+  margin: 0 auto;
+}
+.probabilities {
+  margin-bottom: 20px;
 }
 
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen
-and (min-device-width : 320px)
-and (max-device-width : 480px) {
-  body {
-    padding: 0;
-    margin: 0;
-    width: 320px; }
-  }
-
-/* iPads (portrait and landscape) ----------- */
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  body {
-    width: 495px;
-  }
+.result {
+  width: 166px;
+  font-size: 20px;
+  margin: 10px auto 0 auto;
 }
