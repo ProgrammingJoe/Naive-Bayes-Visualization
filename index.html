@@ -10,6 +10,10 @@
   <div class="title-block">
     <p class="title">Naive Bayes Visualization For Learning</p>
   </div>
+  <div class="radio-block">
+    <input type="radio" id="radio-button"/>
+    <span class="smoothing">Smoothing value of 1</span>
+  </div>
 <div id="controls">
   <div id="buttons" />
 </div>
@@ -24,6 +28,8 @@ function spreadsheet2() {
 
       var class2 = {};
       var class4 = {};
+      var smoothing = false;
+      var feature_count = 15;
 
       function createSpreadsheet(incData) {
         var keyValues = d3.keys(incData[0])
@@ -103,6 +109,11 @@ function spreadsheet2() {
 
           d3.select("#button1").attr("class", "not-active");
           d3.select("#button2").attr("class", "");
+
+          if(d3.select("#radio-button").node().checked) {
+            smoothing = true;
+          }
+          d3.select("#controls").transition().duration(1000).style("top", -38 + "px");
         }
 
         // Merges the rows of the table
@@ -179,7 +190,13 @@ function spreadsheet2() {
           })
           .selectAll("div.data")
           .each(function (d, i) {
-            d3.select(this).transition().delay(2000).text(class2.vals[i]);
+            if(smoothing) {
+              d3.select(this).transition().delay(2000).text(class2.vals[i]);
+              d3.select(this).transition().delay(500*i+3000).text(class2.vals[i]+1);
+            } else {
+              d3.select(this).transition().delay(2000).text(class2.vals[i]);
+            }
+
             if(i === class2.vals.length - 1) {
               d3.select(this).transition().delay(2000).text("Mystical");
             } else if(i === 0) {
@@ -213,7 +230,12 @@ function spreadsheet2() {
           })
           .selectAll("div.data")
           .each(function (d, i) {
-            d3.select(this).transition().delay(2000).text(class4.vals[i]);
+            if(smoothing) {
+              d3.select(this).transition().delay(2000).text(class4.vals[i]);
+              d3.select(this).transition().delay(500*i+3000).text(class4.vals[i]+1);
+            } else {
+              d3.select(this).transition().delay(2000).text(class4.vals[i]);
+            }
             if(i === class4.vals.length - 1) {
               d3.select(this).transition().delay(2000).text("Real");
             } else if(i === 0) {
@@ -224,9 +246,19 @@ function spreadsheet2() {
           d3.select("#controls").append("div").attr("class", "class-counts");
           d3.select("#controls .class-counts").append("p").attr("class", "class-count-1").text("Mystical Class Count: " + class2.len);
           d3.select("#controls .class-counts").append("p").attr("class", "class-count-2").text("Real Class Count: " + class4.len);
+          if(smoothing) {
+            d3.select("#controls").append("div").attr("class", "smooth-class-counts");
+            d3.select("#controls .smooth-class-counts").append("p").attr("class", "smoothing-count").text("Number of Features: " + feature_count);
+            d3.select("#controls .smooth-class-counts").append("p").attr("class", "class-count-smooth-1").text("Class Count + Feature Count: " + (class2.len+feature_count));
+            d3.select("#controls .smooth-class-counts").append("p").attr("class", "class-count-smooth-2").text("Class Count + Feature Count: " + (class4.len+feature_count));
+          }
 
           d3.select("#button3").attr("class", "not-active");
-          d3.select("#button4").transition().delay(2500).attr("class", "");
+          if(smoothing) {
+            d3.select("#button4").transition().delay(8000).attr("class", "");
+          } else {
+            d3.select("#button4").transition().delay(2500).attr("class", "");
+          }
         }
 
         // Sums the rows and divides by the number of classes
@@ -244,9 +276,14 @@ function spreadsheet2() {
           .selectAll("div.data")
           .each(function (d, i) {
             if(i != 0 && i != 16) {
-              var prob = (class4.vals[i]/class4.len).toFixed(2)
+              if(smoothing) {
+                var prob = ((class4.vals[i]+1)/(class4.len+feature_count)).toFixed(2)
+                d3.select(this).transition().delay(600*i).text(class4.vals[i]+1 + "/" + (class4.len + feature_count));
+              } else {
+                var prob = (class4.vals[i]/class4.len).toFixed(2)
+                d3.select(this).transition().delay(600*i).text(class4.vals[i] + "/" + (class4.len));
+              }
               class4.feature_probs.push(prob)
-              d3.select(this).transition().delay(600*i).text(class4.vals[i] + "/" + class4.len);
               d3.select(this).transition().delay(10000).text(prob);
             } else if(i == 0){
               d3.select(this).text("Probability");
@@ -261,9 +298,14 @@ function spreadsheet2() {
           .selectAll("div.data")
           .each(function (d, i) {
             if(i != 0 && i != 16) {
-              var prob = (class2.vals[i]/class2.len).toFixed(2)
-              class2.feature_probs.push(prob)
-              d3.select(this).transition().delay(600*i).text(class2.vals[i] + "/" + class2.len);
+              if(smoothing) {
+                var prob = ((class2.vals[i]+1)/(class2.len+feature_count)).toFixed(2)
+                d3.select(this).transition().delay(600*i).text(class2.vals[i]+1 + "/" + (class2.len + feature_count));
+              } else {
+                var prob = (class2.vals[i]/class2.len).toFixed(2)
+                d3.select(this).transition().delay(600*i).text(class2.vals[i] + "/" + (class2.len));
+              }
+              class2.feature_probs.push(prob);
               d3.select(this).transition().delay(10000).text(prob);
             } else if(i == 0){
               d3.select(this).text("Probability");
@@ -280,6 +322,10 @@ function spreadsheet2() {
 
           d3.select('#controls .class-counts').transition().duration(1000).style("opacity", "0");
           d3.select('#controls .class-counts').transition().delay(1000).style("position", "absolute");
+          if(smoothing) {
+            d3.select('#controls .smooth-class-counts').transition().duration(1000).style("opacity", "0");
+            d3.select('#controls .smooth-class-counts').transition().delay(1000).style("position", "absolute");
+          }
           d3.select('div.head div:last-child').text('');
 
           d3.selectAll("div.datarow").data(dataset, function(d) {
@@ -322,6 +368,7 @@ function spreadsheet2() {
           .each(function (d, i) {
             if(i != 0 && i != 16) {
               height = parseFloat(class2.feature_probs[i-1])/(parseFloat(class4.feature_probs[i-1]) + parseFloat(class2.feature_probs[i-1]))*400;
+              console.log(height);
               d3.select(this).style("top", 40 + "px");
               d3.select(this).style("width", 66 + "px");
               d3.select(this).style("margin-left", 6 + "px");
@@ -358,7 +405,7 @@ function spreadsheet2() {
           .append("div")
           .attr("class", "computations-class-2");
 
-          d3.select("#controls").transition().duration(2000).style("top", -76 + "px");
+          d3.select("#controls").transition().duration(2000).style("top", -100 + "px");
 
           for(var i = 0; i < 15; i++) {
             d3.select("#controls .inputs").insert("input");

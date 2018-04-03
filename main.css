@@ -125,6 +125,7 @@ input {
 
 #controls {
   position: relative;
+  background-color: white;
 }
 
 .computation-number {
@@ -151,21 +152,34 @@ input {
   margin: 0 auto;
   width: 440px;
 }
+.smooth-class-counts {
+  margin: 0 auto;
+  width: 588px;
+}
 .class-count-1,
 .class-count-2 {
   display: inline-block;
   width: 190px;
   padding: 0 15px;
 }
+.class-count-smooth-1,
+.class-count-smooth-2 {
+  padding: 0 15px;
+  width: 264px;
+  display: inline-block;
+}
 
 .class-count-1 {
   background-color: #63C5F0;
-  text-align: right;
 }
-
 .class-count-2 {
   background-color: #F9AF67;
-  text-align: left;
+}
+.class-count-smooth-1 {
+  background-color: #63C5F0;
+}
+.class-count-smooth-2 {
+  background-color: #F9AF67;
 }
 
 .computations {
@@ -180,4 +194,18 @@ input {
   width: 166px;
   font-size: 20px;
   margin: 10px auto 0 auto;
+}
+
+.radio-block {
+  width: 198px;
+  margin: 5px auto 15px auto;
+  position: relative;
+}
+#radio-button {
+  width: 10px;
+}
+
+.smoothing-count {
+  width: 192px;
+  margin: 0 auto;
 }
