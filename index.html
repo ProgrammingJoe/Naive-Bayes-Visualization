@@ -321,10 +321,10 @@ function spreadsheet2() {
           var dataset = d3.selectAll("div.datarow").data();
 
           d3.select('#controls .class-counts').transition().duration(1000).style("opacity", "0");
-          d3.select('#controls .class-counts').transition().delay(1000).style("position", "absolute");
+          d3.select('#controls .class-counts').transition().delay(1000).style("display", "none");
           if(smoothing) {
             d3.select('#controls .smooth-class-counts').transition().duration(1000).style("opacity", "0");
-            d3.select('#controls .smooth-class-counts').transition().delay(1000).style("position", "absolute");
+            d3.select('#controls .smooth-class-counts').transition().delay(1000).style("display", "none");
           }
           d3.select('div.head div:last-child').text('');
 
