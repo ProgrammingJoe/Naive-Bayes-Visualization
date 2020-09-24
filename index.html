@@ -7,6 +7,10 @@
 <script src="http://d3js.org/d3.v3.min.js" type="text/javascript">
 </script>
 <body onload="spreadsheet2();">
+  <input type="file" id="file" name="file" onchange="add(event)"/>
+  <a href="data/fabricated.json">
+    Example Data
+  </a>
   <div class="title-block">
     <p class="title">Naive Bayes Visualization For Learning</p>
   </div>
@@ -20,8 +24,15 @@
   <footer>
 <script>
 
-function spreadsheet2() {
-      d3.json("data/fabricated.json",function(error,data) {
+function add(event) {
+  var userFile = document.getElementById('file');
+  userFile.src = URL.createObjectURL(event.target.files[0]);
+  var data = userFile.src;
+  spreadsheet2(data)
+}
+
+function spreadsheet2(filePath) {
+      d3.json(filePath, function(error,data) {
         expData=data;
         createSpreadsheet(data)
       });
